@@ -1,0 +1,143 @@
+sqlite3 /data/data/com.ct/databases/CalgaryTransit
+
+select * from stops_times where stop_id='4129' and trip_id in (select trip_id from trips where route_id='42403')
+
+
+select * from stop_times where stop_id='6858' and  
+
+select trip_id from trips where route_id='42403'
+
+
+select s.arrival_time,t.trip_id from stop_times s,trips t
+where s.trip_id in ('2501554','2501555') 
+
+
+select s.arrival_time,s.stop_sequence,t.route_id  from stop_times s ,trips t
+where s. stop_id='4860' and s.trip_id(select trip_id from trips t ,routes r,where r.route)
+order by s.arrival_time
+
+
+select s.arrival_time,s.stop_sequence,t.route_id  from stop_times s ,trips t 
+where s. stop_id='4860' and s.trip_id in('2501554','2501555') order by s.arrival_time
+
+
+ select trip_id from trips t ,routes r
+ where r.route_short_name='48' and r.route_id=t.route_id
+ 
+ 
+ select s.arrival_time,s.trip_id from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name='48' and r.route_id=t.route_id )
+
+and st.s.stop_id='4860' order by arrival_time
+
+
+select s.arrival_time,s.trip_id from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name='48' and r.route_id=t.route_id )
+
+and st.stop_code='4129' and st.stop_id=s.stop_id order by arrival_time
+
+
+
+select s.arrival_time,s.trip_id ,s.stop_sequence from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name='48' and r.route_id=t.route_id and t.service_id='1' )
+
+and st.stop_code='4129' and st.stop_id=s.stop_id order by arrival_time
+
+
+
+select count(*) from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name='48' and r.route_id=t.route_id and t.service_id='3' )
+
+and st.stop_code='4129' and st.stop_id=s.stop_id order by arrival_time
+
+
+
+select  r.route_id from routes r, trips t ,stops s,stop_times st where s.stop_code='4129' and s.stop_id=st.stop_id and t.trip_id=r.trip_id
+
+
+select  r.route_short_name from routes r, trips t ,stops s,stop_times st where s.stop_code='4129' and s.stop_id=st.stop_id and st.trip_id=t.trip_id and t.route_id=r.route_id
+
+
+
+
+select s.arrival_time,s.stop_sequence from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name IN( select  r.route_short_name from routes r, trips t ,stops s,stop_times st where s.stop_code='5718' and s.stop_id=st.stop_id and st.trip_id=t.trip_id and t.route_id=r.route_id ) and r.route_id=t.route_id and t.service_id='1' )
+
+and st.stop_code='5718' and st.stop_id=s.stop_id order by s.stop_sequence, arrival_time 
+
+
+select s.arrival_time,s.stop_sequence from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name='119' and r.route_id=t.route_id and t.service_id='1' )
+
+and st.stop_code='5718' and st.stop_id=s.stop_id order by s.stop_sequence, arrival_time 
+
+
+select s.arrival_time,r.route_short_name from stop_times s,stops st,routes r,trips t
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name IN( select  r.route_short_name from routes r, trips t ,stops s,stop_times st where s.stop_code='5718' 
+ and s.stop_id=st.stop_id and st.trip_id=t.trip_id and t.route_id=r.route_id ) and r.route_id=t.route_id and t.service_id='1' )
+and st.stop_code='5718' and st.stop_id=s.stop_id and r.route_id=t.route_id order by s.stop_sequence, arrival_time 
+
+
+
+select s.arrival_time,s.stop_sequence from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name IN( select  r.route_short_name from routes r, trips t ,stops s,stop_times st where s.stop_code='5718' and s.stop_id=st.stop_id and st.trip_id=t.trip_id and t.route_id=r.route_id ) and r.route_id=t.route_id and t.service_id='1' )
+
+and st.stop_code='5718' and st.stop_id=s.stop_id order by s.stop_sequence, arrival_time LIMIT 10
+
+
+
+select s.arrival_time,s.stop_sequence from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name IN( select  r.route_short_name from routes r, trips t ,stops s,stop_times st where s.stop_code='5718' and s.stop_id=st.stop_id and st.trip_id=t.trip_id and t.route_id=r.route_id ) and r.route_id=t.route_id and t.service_id='1' )
+
+and st.stop_code='5718' and st.stop_id=s.stop_id order by s.stop_sequence, arrival_time and time(s.arrival_time) > time('now')
+
+
+
+select count(*) from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name IN( select  r.route_short_name from routes r, trips t ,stops s,stop_times st where s.stop_code='5718' and s.stop_id=st.stop_id and st.trip_id=t.trip_id and t.route_id=r.route_id ) and r.route_id=t.route_id and t.service_id='1' )
+
+and st.stop_code='5718' and st.stop_id=s.stop_id order by s.stop_sequence, arrival_time and time(s.arrival_time) > time('now')
+
+
+
+select time(s.arrival_time)>time('now'),s.stop_sequence from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name IN( select  r.route_short_name from routes r, trips t ,stops s,stop_times st where s.stop_code='5718' and s.stop_id=st.stop_id and st.trip_id=t.trip_id and t.route_id=r.route_id ) and r.route_id=t.route_id and t.service_id='1' )
+
+and st.stop_code='5718' and st.stop_id=s.stop_id order by s.stop_sequence, arrival_time
+
+select s.arrival_time from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name IN( select  r.route_short_name from routes r, trips t ,stops s,stop_times st where s.stop_code='5718' and s.stop_id=st.stop_id and st.trip_id=t.trip_id and t.route_id=r.route_id ) and r.route_id=t.route_id and t.service_id='1' )
+and st.stop_code='5718' and st.stop_id=s.stop_id and time(s.arrival_time) > time('now','-1 hour') and time(s.arrival_time) < time('now','+2 hour') order by s.stop_sequence, arrival_time 
+
+
+select s.arrival_time  from stop_times s,stops st
+where s.trip_id in
+ (  select trip_id from trips t ,routes r
+ where r.route_short_name IN( select  r.route_short_name from routes r, trips t ,stops s,stop_times st where s.stop_code='4129' 
+ and s.stop_id=st.stop_id and st.trip_id=t.trip_id and t.route_id=r.route_id ) and r.route_id=t.route_id and t.service_id='1' )
+and st.stop_code='4129' and st.stop_id=s.stop_id and time(s.arrival_time) > time('now','-1 hour','localtime')  and time(s.arrival_time) < time('now','+2 hour','localtime') order by s.stop_sequence, arrival_time 
+
