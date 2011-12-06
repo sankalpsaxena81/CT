@@ -19,7 +19,10 @@
             </intent-filter>
         </activity>
          <activity android:name=".StopTimingsActivity" >
-            
+        </activity>
+        <activity android:name=".RoutesAtAStopActivity" >
+        </activity>
+        <activity android:name=".StopsOnARouteActivity" >
         </activity>
     </application>
 

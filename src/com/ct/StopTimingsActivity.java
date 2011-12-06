@@ -18,17 +18,16 @@ public class StopTimingsActivity extends ListActivity {
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.stoptimings);
-//	        TextView tv=(TextView)this.findViewById(R.id.busStopTxtField);
+	        //TextView tv=(TextView)this.findViewById(R.id.busStopTxtField);
 	       
 	        Intent thisIntent=this.getIntent();
 	        Bundle bu=thisIntent.getExtras();
-//	        tv.setText((String)bu.get("BusStop"));
+	        //tv.setText((String)bu.get("BusStop"));
 	        ArrayList<String> timings=(ArrayList<String>)bu.get("BusStopTimings");
-	        String[] contents= new String[2];
-//	        contents[0]="sdasd";
-//	        contents[1]="sdasfddfd";
+	        String[] contents= new String[0];
+//	        
 	        String[] timingsArr=timings.toArray(contents);
-	        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,timingsArr));
+	        setListAdapter(new ArrayAdapter<String>(this, R.layout.bustimingslist,R.id.label,timingsArr));
 	        
 	    }
 
